@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed;
+    [SerializeField]  float moveSpeed;
     private float moveX, moveY;
-    public Rigidbody2D rig2D;
+    [SerializeField]  Rigidbody2D rig2D;
+    private bool isMoving;
+
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,9 +23,10 @@ public class Player : MonoBehaviour
         //Preencher o vetor de movimentação com os inputs dos eixos horizontal e
         moveX = Input.GetAxisRaw("Horizontal");
         moveY = Input.GetAxisRaw("Vertical");
-
-        Move();
         
+        // Chama o método Move
+        Move();
+        Animation();
     }
 
    void Move()
@@ -30,5 +34,22 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(moveX, moveY, 0);
         rig2D.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
     }
+
+void Animation()
+{
+    if (moveX == 0 && moveY == 0)
+    {
+        isMoving = false;
+    }
+    else
+    {
+        isMoving = true;
+    }
+
+    anim.SetBool("isMoving", isMoving);
+
+anim.SetFloat("Horizontal", moveX);
+    anim.SetFloat("Vertical", moveY);
+}
 
 }
