@@ -26,13 +26,17 @@ public class Player : MonoBehaviour
         
         // Chama o método Move
         Move();
+        // Chama o método Animation
         Animation();
+        // Chama o método Attack
+        Attack();
     }
 
    void Move()
     {
         Vector3 direction = new Vector3(moveX, moveY, 0);
         rig2D.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
+        
     }
 
 void Animation()
@@ -48,8 +52,18 @@ void Animation()
 
     anim.SetBool("isMoving", isMoving);
 
-anim.SetFloat("Horizontal", moveX);
+    anim.SetFloat("Horizontal", moveX);
     anim.SetFloat("Vertical", moveY);
 }
+
+ void Attack()
+ {
+    if(Input.GetKeyDown(KeyCode.Space))
+    {
+        anim.SetTrigger("isAttack");
+    }
+ }
+
+
 
 }
