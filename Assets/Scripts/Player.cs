@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float hp = 100;
     [SerializeField]  float moveSpeed;
     private float moveX, moveY;
     [SerializeField]  Rigidbody2D rig2D;
     private bool isMoving;
-
     private Animator anim;
 
     // Start is called before the first frame update
@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         Animation();
         // Chama o método Attack
         Attack();
+        print(hp);
     }
 
    void Move()
