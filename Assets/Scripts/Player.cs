@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
    void Move()
     {
-        Vector3 direction = new Vector3(moveX, moveY, 0);
+        Vector3 direction = new Vector3(moveX, moveY, 0).normalized;
         rig2D.MovePosition(transform.position + direction * moveSpeed * Time.deltaTime);
         
     }
