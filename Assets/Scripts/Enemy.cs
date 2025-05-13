@@ -5,10 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int life;
+    public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
         print(life);  // Exibe a vida atual no console
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -16,9 +19,10 @@ public class Enemy : MonoBehaviour
     {
         if(life <= 0)
         {
+            player.GetComponent<Player>().enemiesDefeat += 1;
             Destroy(this.gameObject);
         }
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
